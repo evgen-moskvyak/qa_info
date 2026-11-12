@@ -3,227 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual QA Knowledge Base | Web & Mobile</title>
+    <title>QA Team Lead Knowledge Base | Web & Mobile</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header class="header">
         <div class="container">
-            <h1>🚀 Manual QA Knowledge Base</h1>
-            <p>Усе необхідне для ручного тестування Web та Mobile додатків в одному місці</p>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Шукати в базі знань (наприклад: API, Logcat, Smoke)...">
+            <div class="badge">Web & Mobile • Middle to Team Lead</div>
+            <h1>QA Engineering & Lead Knowledge Base</h1>
+            <p>Структурований довідник: від теорії та глибокого дебагу до тест-менеджменту та архітектури процесів</p>
+            
+            <div class="controls-wrapper">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Пошук за ключовими словами (наприклад: JOIN, Charles, DRE, Staged Rollout, OWASP)...">
+                </div>
+                <div class="action-buttons">
+                    <button id="expandAllBtn" class="btn-secondary">Розгорнути все</button>
+                    <button id="collapseAllBtn" class="btn-secondary">Згорнути все</button>
+                </div>
             </div>
+
+            <nav class="filter-tabs" id="filterTabs">
+                <button class="tab-btn active" data-filter="all">Усі розділи</button>
+                <button class="tab-btn" data-filter="core">Core QA & Design</button>
+                <button class="tab-btn" data-filter="web-api">Web, API & Architecture</button>
+                <button class="tab-btn" data-filter="mobile">Mobile Deep Dive</button>
+                <button class="tab-btn" data-filter="db-sec">SQL, Debug & Security</button>
+                <button class="tab-btn" data-filter="lead">Test Management & Lead</button>
+            </nav>
         </div>
     </header>
 
     <main class="container main-content">
+        <div class="stats-bar">
+            <span id="topicsCounter">Завантаження тем...</span>
+        </div>
         
-        <!-- РОЗДІЛ 1: ТЕОРІЯ ТА БАЗОВІ ПОНЯТТЯ -->
-        <section class="category-section" data-category="theory">
-            <h2>📚 1. Теорія та Базові Поняття (QA Theory)</h2>
-            
-            <details class="accordion">
-                <summary>SDLC та STLC (Життєвий цикл розробки та тестування)</summary>
-                <div class="accordion-body">
-                    <p><strong>SDLC (Software Development Life Cycle)</strong> — процес створення ПЗ від ідеї до підтримки (етапи: Вимоги -> Дизайн -> Розробка -> Тестування -> Реліз -> Підтримка).</p>
-                    <p><strong>STLC (Software Testing Life Cycle)</strong> — послідовність етапів процесу тестування:</p>
-                    <ul>
-                        <li>Аналіз вимог (Requirement Analysis)</li>
-                        <li>Планування тестування (Test Planning)</li>
-                        <li>Розробка тест-кейсів (Test Design)</li>
-                        <li>Налаштування середовища (Test Environment Setup)</li>
-                        <li>Виконання тестування (Test Execution)</li>
-                        <li>Закриття тестування (Test Closure)</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>Види та Рівні тестування</summary>
-                <div class="accordion-body">
-                    <p><strong>Рівні тестування:</strong></p>
-                    <ul>
-                        <li><strong>Unit (Модульне):</strong> перевірка окремих функцій/класів розробниками.</li>
-                        <li><strong>Integration (Інтеграційне):</strong> перевірка взаємодії кількох модулів або сервісів.</li>
-                        <li><strong>System (Системне):</strong> перевірка продукту в цілому на відповідність вимогам.</li>
-                        <li><strong>Acceptance (Приймальне):</strong> перевірка бізнес-вимог замовником (UAT).</li>
-                    </ul>
-                    <p><strong>Основні види:</strong> Функціональне, Нефункціональне (продуктивність, безпека, надійність), Регресійне (перевірка після змін), Smoke (димове, швидка перевірка критичної базової функціональності), Sanity (перевірка конкретного виправленого фіксу).</p>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>Техніки тест-дизайну</summary>
-                <div class="accordion-body">
-                    <p>Методи створення ефективних тест-кейсів з мінімальною кількістю комбінацій:</p>
-                    <ul>
-                        <li><strong>Еквівалентні класи (Equivalence Partitioning):</strong> поділ вхідних даних на класи, де система веде себе однаково. Тестуємо по одному представнику з класу.</li>
-                        <li><strong>Граничні значення (Boundary Value Analysis):</strong> перевірка на стиках класів ($min$, $min+1$, $max-1$, $max$). Наприклад, якщо поле від 1 до 100, перевіряємо 0, 1, 2, 99, 100, 101.</li>
-                        <li><strong>Попарне тестування (Pairwise):</strong> комбінування параметрів по два, щоб зменшити кількість тестів при багатьох змінних.</li>
-                        <li><strong>Стан/Перехід (State Transition):</strong> перевірка переходів між станами об'єкта (наприклад, статус замовлення: Створено -> Оплачено -> Скасовано).</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>Артефакти тестування: Bug Report та Test Case</summary>
-                <div class="accordion-body">
-                    <p><strong>Test Case:</strong> набір кроків та очікуваних результатів для перевірки конкретної фічі.</p>
-                    <p><strong>Структура якісного Bug Report:</strong></p>
-                    <ul>
-                        <li><strong>Title (Заголовок):</strong> Коротко де, що сталося (Де: На сторінці логіну, Що: Кнопка "Увійти" не активна при заповнених полях).</li>
-                        <li><strong>Environment (Оточення):</strong> ОС, браузер, версія додатка, пристрій.</li>
-                        <li><strong>Steps to Reproduce (Кроки):</strong> 1. Відкрити... 2. Ввести... 3. Натиснути...</li>
-                        <li><strong>Actual Result (Фактичний результат):</strong> Що відбулося насправді.</li>
-                        <li><strong>Expected Result (Очікуваний результат):</strong> Як має бути згідно з вимогами.</li>
-                        <li><strong>Attachments (Докази):</strong> Скріншот, відео, логи.</li>
-                    </ul>
-                    <p><strong>Severity (Серйозність — вплив на систему):</strong> Blocker, Critical, Major, Minor, Trivial.</p>
-                    <p><strong>Priority (Пріоритет — терміновість виправлення для бізнесу):</strong> High, Medium, Low.</p>
-                </div>
-            </details>
-        </section>
-
-        <!-- РОЗДІЛ 2: WEB TESTING -->
-        <section class="category-section" data-category="web">
-            <h2>🌐 2. Web Testing (Веб-тестування)</h2>
-
-            <details class="accordion">
-                <summary>Кліент-серверна архітектура та HTTP/HTTPS</summary>
-                <div class="accordion-body">
-                    <p>Браузер (Клієнт) надсилає запит (Request) на сервер, сервер обробляє його і повертає відповідь (Response).</p>
-                    <p><strong>Методи HTTP:</strong></p>
-                    <ul>
-                        <li><code>GET</code> — отримати дані з сервера.</li>
-                        <li><code>POST</code> — створити нові дані на сервері.</li>
-                        <li><code>PUT / PATCH</code> — оновити існуючі дані (повністю або частково).</li>
-                        <li><code>DELETE</code> — видалити дані.</li>
-                    </ul>
-                    <p><strong>Коди стану (Status Codes):</strong></p>
-                    <ul>
-                        <li><code>2xx (успіх):</code> 200 OK, 201 Created.</li>
-                        <li><code>3xx (перенаправлення):</code> 301 Moved Permanently, 302 Found.</li>
-                        <li><code>4xx (помилка клієнта):</code> 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found.</li>
-                        <li><code>5xx (помилка сервера):</code> 500 Internal Server Error, 502 Bad Gateway, 504 Gateway Timeout.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>Робота з Browser DevTools</summary>
-                <div class="accordion-body">
-                    <p>Основні вкладки для QA в Google Chrome / DevTools (F12):</p>
-                    <ul>
-                        <li><strong>Elements:</strong> перегляд та зміна HTML/CSS DOM-дерева в реальному часі.</li>
-                        <li><strong>Console:</strong> перегляд помилок JavaScript, виконання власного JS-коду.</li>
-                        <li><strong>Network:</strong> аналіз трафіку, перевірка HTTP-запитів/відповідей (Payload, Headers, Response), імітація повільного інтернету (Throttling: Slow 3G).</li>
-                        <li><strong>Application / Storage:</strong> перевірка LocalStorage, SessionStorage, Cookies та кешу.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>API Testing для Manual QA (Postman)</summary>
-                <div class="accordion-body">
-                    <p>Тестування програмного інтерфейсу без графічного інтерфейсу (UI).</p>
-                    <ul>
-                        <li>Використовуємо інструменти типу <strong>Postman</strong> або <strong>Swagger</strong>.</li>
-                        <li>Перевіряємо структуру JSON/XML відповідей, коректність статус-кодів та заголовків (Headers).</li>
-                        <li>Авторизація: Basic Auth, Bearer Token, API Keys, Cookies.</li>
-                    </ul>
-                </div>
-            </details>
-        </section>
-
-        <!-- РОЗДІЛ 3: MOBILE TESTING -->
-        <section class="category-section" data-category="mobile">
-            <h2>📱 3. Mobile Testing (Мобільне тестування)</h2>
-
-            <details class="accordion">
-                <summary>Особливості платформ та типи додатків</summary>
-                    <div class="accordion-body">
-                    <p><strong>Типи додатків:</strong></p>
-                    <ul>
-                        <li><strong>Native (Нативні):</strong> написані спеціально під платформу (Swift/Obj-C для iOS, Kotlin/Java для Android). Найвища продуктивність.</li>
-                        <li><strong>Mobile Web:</strong> сайти адаптовані під мобільні браузери.</li>
-                        <li><strong>Hybrid (Гібридні):</strong> веб-додатки всередині нативної оболонки (наприклад, Ionic, React Native / Capacitor).</li>
-                    </ul>
-                    <p><strong>Головні відмінності від Web:</strong> різноманітність пристроїв, роздільних здатностей, версій ОС, обмеження батареї, пам'яті та мережі.</p>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>Специфічні види перевірок на мобільних пристроях</summary>
-                <div class="accordion-body">
-                    <ul>
-                        <li><strong>Interrupts (Переривання):</strong> вхідний дзвінок, сповіщення, дзвінок у месенджері (Telegram/Viber), витягування шторки, розрядка батареї, вимкнення живлення. Додаток повинен коректно відновлювати стан.</li>
-                        <li><strong>Network connectivity:</strong> переключення Wi-Fi на 4G/5G, повна втрата мережі (офлайн-режим), слабкий сигнал.</li>
-                        <li><strong>Gestures (Жести):</strong> тап, сваїп, дабл-тап, пінч-ту-зум (збільшення двома пальцями), обертання екрана (Portrait / Landscape).</li>
-                        <li><strong>Updates & Installation:</strong> оновлення додатку поверх старої версії (backward compatibility), видалення даних, встановлення з маркетів.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>Збір логів (Logcat та Xcode)</summary>
-                <div class="accordion-body">
-                    <p><strong>Android (`adb logcat`):</strong></p>
-                    <ul>
-                        <li>Встановити Android SDK Platform-Tools, підключити телефон по USB з увімкненим "USB Debugging".</li>
-                        <li>Команда в терміналі: <code>adb logcat</code> для перегляду всіх системних логів у реальному часі.</li>
-                        <li>Фільтрація за помилками: <code>adb logcat *:E</code> або за тегом/пакетом.</li>
-                    </ul>
-                    <p><strong>iOS (Xcode / Console.app):</strong></p>
-                    <ul>
-                        <li>Підключення через Mac, відкриття Xcode -> Window -> Devices and Simulators або використання програми Console для перегляду краш-логів (Crash Logs).</li>
-                    </ul>
-                </div>
-            </details>
-        </section>
-
-        <!-- РОЗДІЛ 4: ІНСТРУМЕНТИ -->
-        <section class="category-section" data-category="tools">
-            <h2>🛠️ 4. Інструменти та Практика</h2>
-
-            <details class="accordion">
-                <summary>Git для QA (Базовий мінімум)</summary>
-                <div class="accordion-body">
-                    <p>Основні команди, які потрібні тестувальнику для роботи з репозиторіями та проєктами:</p>
-                    <ul>
-                        <li><code>git clone [url]</code> — клонування репозиторію на локальний ПК.</li>
-                        <li><code>git status</code> — перевірка статусу файлів.</li>
-                        <li><code>git checkout -b [branch_name]</code> — створення нової гілки та перехід на неї.</li>
-                        <li><code>git pull</code> — оновлення локальної гілки з віддаленого репозиторію.</li>
-                        <li><code>git add .</code> — додавання змінених файлів до коміту.</li>
-                        <li><code>git commit -m "message"</code> — збереження змін.</li>
-                        <li><code>git push</code> — відправка комітів на GitHub.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>Jira / Task Trackers</summary>
-                <div class="accordion-body">
-                    <p>Інструмент для відстеження завдань та дефектів:</p>
-                    <ul>
-                        <li><strong>Epic -> Story -> Task -> Bug:</strong> ієрархія сутностей у проєкті.</li>
-                        <li><strong>Workflow (Життєвий цикл задачі/бага):</strong> To Do -> In Progress -> In Testing (QA) -> Done / Closed (або Reopened, якщо знайдено баг повторно).</li>
-                    </ul>
-                </div>
-            </details>
-        </section>
-
+        <!-- Сюди JS автоматично згенерує всі розділи та гармошки з файлу data.js -->
+        <div id="kbContainer"></div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>Створено для особистої бази знань | Hosted on GitHub Pages 🚀</p>
+            <p>Personal QA Team Lead Knowledge Base • Легко оновлюється через <code>data.js</code></p>
         </div>
     </footer>
 
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
